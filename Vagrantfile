@@ -14,12 +14,12 @@ Vagrant.configure("2") do |config|
     control.vm.network "private_network", ip: "192.168.56.110"
     control.vm.provision "shell", inline: $hostsfile_update
     control.vm.provider "virtualbox" do |v|
-    config.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--audio", "none"]
-    end
-    config.vm.synced_folder "ansible/", "/root/ansible"
- 	v.memory = 4096
-	v.cpus = 2
+      config.vm.provider "virtualbox" do |vb|
+        vb.customize ["modifyvm", :id, "--audio", "none"]
+      end
+      control.vm.synced_folder "./ansible", "/root/ansible", owner: "root", group: "root"
+      v.memory = 4096
+      v.cpus = 2
     end
   end
 
