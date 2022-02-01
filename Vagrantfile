@@ -17,6 +17,7 @@ Vagrant.configure("2") do |config|
     config.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--audio", "none"]
     end
+    config.vm.synced_folder "ansible/", "/root/ansible"
  	v.memory = 4096
 	v.cpus = 2
     end
