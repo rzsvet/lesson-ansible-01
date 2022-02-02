@@ -12,4 +12,5 @@
 - name: APACHE | Remove firewall rule for HTTP
   ansible.builtin.firewalld:
     service: http
-    state: absent
+    permanent: true
+    state: disabled

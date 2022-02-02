@@ -1,0 +1,11 @@
+---
+- name: GRUB | Change variables in GRUB_CMDLINE_LINUX
+  ansible.builtin.lineinfile:
+    state: present
+    dest: /etc/default/grub
+    backrefs: yes
+    regexp: '^(GRUB_CMDLINE_LINUX=(?!.* net.ifnames)\"[^\"]+)(\".*)'
+    line: '\1 net.ifnames=0 biosdevname=0\2'
+
+- name: GRUB | Write grub configuration file
+  command: grub2-mkconfig -o /boot/grub2/grub.cfg
