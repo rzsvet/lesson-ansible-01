@@ -1,0 +1,22 @@
+---
+- name: APACHE | Install the latest version of Apache
+  ansible.builtin.yum:
+    name: httpd
+    state: latest
+
+- name: APACHE | Start service httpd, if not started
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: APACHE | Creating a file with content
+  ansible.builtin.copy:
+    dest: "/var/www/html/index.html"
+    content: "Welcome to my web server"
+
+- name: APACHE | Enable HTTP porn on firewall
+  ansible.builtin.firewalld:
+    service: http
+    permanent: true
+    state: enabled

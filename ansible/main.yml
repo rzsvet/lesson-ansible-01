@@ -1,0 +1,25 @@
+---
+- hosts: web
+  gather_facts: yes
+  become: yes
+  vars:
+    task_action: install_apache # install_apache, remove_apache, modify_grub
+  tasks:
+    - name: FIREWALLD | Install
+      include_role:
+        name: install_firewalld
+
+    - name: APACHE | Install
+      include_role:
+        name: install_apache
+      when: task_action == "install_apache"
+
+    - name: APACHE | Remove
+      include_role:
+        name: remove_apache
+      when: task_action == "remove_apache"
+
+    - name: GRUB | Modify
+      include_role:
+        name: modify_grub
+      when: task_action == "modify_grub"

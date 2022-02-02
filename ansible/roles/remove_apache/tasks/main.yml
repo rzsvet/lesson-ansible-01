@@ -1,0 +1,15 @@
+---
+- name: APACHE | Remove the latest version of Apache
+  ansible.builtin.yum:
+    name: httpd
+    state: absent
+
+- name: APACHE | Remove a file
+  ansible.builtin.file:
+    path: /var/www/html/index.html
+    state: absent
+
+- name: APACHE | Remove firewall rule for HTTP
+  ansible.builtin.firewalld:
+    service: http
+    state: absent
